@@ -1,3 +1,5 @@
+var Ships = require('./ships');
+
 var UI = function() {
   var ships = new Ships();
 

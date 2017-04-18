@@ -68,7 +68,9 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
+
+var Ships = __webpack_require__(2);
 
 var UI = function() {
   var ships = new Ships();
@@ -117,6 +119,34 @@ var app = function() {
 }
 
 window.onload = app;
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+var Ships = function(){}
+
+Ships.prototype = {
+  makeRequest: function(url, callback){
+    var request = new XMLHttpRequest();
+    request.open('GET', url);
+    request.onload = callback;
+    request.send();
+  },
+
+  all: function(callback){
+    var self = this; 
+    this.makeRequest("http://localhost:3000/api/ships", function(){
+      if(this.status !== 200) return; 
+      var jsonString = this.responseText;
+      var results = JSON.parse(jsonString);
+
+      callback(results);
+    });
+  }
+}
+
+module.exports = Ships;
 
 /***/ }
 /******/ ]);
