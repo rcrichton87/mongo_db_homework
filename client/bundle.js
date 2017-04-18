@@ -63,26 +63,60 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ function(module, exports) {
+
+var UI = function() {
+  var ships = new Ships();
+
+  ships.all(function(results){
+    this.render(results);
+  }.bind(this));
+  
+}
+
+UI.prototype = {
+  createText: function(text, label) {
+    var p = document.createElement('p');
+    p.innerText = label + text;
+    return p;
+  },
+
+  appendText: function(element, text, label) {
+    var pTag = this.createText(text, label);
+    element.appendChild(pTag);
+  },
+
+  render: function(ships) {
+    var container = document.getElementById('ships');
+
+    for (var ship of ships) {
+      var li = document.createElement('li');
+      this.appendText(li, ship.name, 'Ship: ');
+      this.appendText(li, ship.speed, 'Speed: ');
+
+      container.appendChild(li);
+    }
+  }
+}
+
+module.exports = UI;
+
+/***/ },
+/* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-var UI = __webpack_require__(1);
+var UI = __webpack_require__(0);
 
 var app = function() {
   new UI();
 }
 
 window.onload = app;
-
-/***/ },
-/* 1 */
-/***/ function(module, exports) {
-
-
 
 /***/ }
 /******/ ]);
