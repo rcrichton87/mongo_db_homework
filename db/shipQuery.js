@@ -1,7 +1,7 @@
 var MongoClient = require('mongodb').MongoClient;
 
 var ShipQuery = function(){
-  this.url = "mongodb://localhost:27017/mongo_homework";  //only the last bit changes to the database name
+  this.url = "mongodb://localhost:27017/mongo_homework";
 };
 
 ShipQuery.prototype = {
@@ -14,4 +14,7 @@ ShipQuery.prototype = {
         });       
       }
     });
-  },
+  }
+}
+
+module.exports = ShipQuery;
